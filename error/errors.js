@@ -1,6 +1,6 @@
 export const Error = {
-    "ErrAddrNotClaimed": "this address has not claimed a did",
-    "ErrAddrNotSetReverse": "this address has not set reverse record",
+    "ErrAddrNotClaimed": "this addr has not claimed a did",
+    "ErrAddrNotSetReverse": "this addr has not set reverse record",
     "ErrDidNotClaimed": "this did name has not been claimed",
     "ErrTokenIdNotMinted": "this tokenId has not been minted",
     "ErrAvatarNotSet": "the avatar text has not been set on this did",

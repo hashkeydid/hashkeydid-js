@@ -1,17 +1,43 @@
-import * as name from "../name.js"
 import { expect } from "chai";
+import * as DIDResolver from "../contract/resolver/resolverContract.js";
+import * as name from "../api/name.js"
+import { Error } from "../error/errors.js";
 
-describe("Test name", async() => {
-    it("set reverse false", async () => {
-        name.SetReverse('0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c', true);
+
+describe("NameTest", async() => {
+    let signer;
+
+    before(async () => {
+        signer = DIDResolver.wallet;
     })
+    
+    it("Get DID name when reverse is false", async () => {
+        try {
+            expect(await name.GetDIDNameByAddr(signer.address));
+        }
+        catch (e) {
+            expect(e.reason).equal(Error.ErrAddrNotSetReverse);
+        }
+    }).timeout(10000);
 
-    // it("get reverse name", async () => {
-    //     // await name.SetReverse('0xB45c5Eac26AF321dd9C02693418976F52E1219b6', false);
-    //     expect(await name.GetDIDNameByAddr('0xB45c5Eac26AF321dd9C02693418976F52E1219b6')).equal("herro.key");
-    // })
+    it("Get DID name force when reverse is false", async () => {
+        let result = await name.GetDIDNameByAddrForce(signer.address);
+        expect(result).equal("herro.key");
+    }).timeout(10000);
 
-    it("get did force", async () => {
-        expect(await name.GetDIDNameByAddr('0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c')).equal("lucas.key");
-    })
+    it("Get DID name force when reverse is false, and set block height", async () => {
+        let overrides = {"blockTag": 36513266};
+        let result = await name.GetDIDNameByAddrForce(signer.address, overrides)
+        expect(result).equal("herro.key");
+        
+        overrides = {"blockTag": 36513265};
+        result = await name.GetDIDNameByAddrForce(signer.address, overrides);
+        expect(result).equal(Error.ErrAddrNotClaimed);
+    }).timeout(10000);
+
+    it("Set reverse true", async () => {
+        name.SetReverse(signer.address, true);
+        let result = await name.GetDIDNameByAddr(signer.address);
+        expect(result).equal("herro.key");
+    }).timeout(10000);
 })

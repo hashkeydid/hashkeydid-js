@@ -8,5 +8,5 @@ const provider = new ethers.providers.JsonRpcProvider(setting.DefaultPlatONUrl);
 // contract for query
 export const DIDResolverContract = new ethers.Contract(setting.DefaultDIDResolverContractAddr, ResolverAbi, provider);
 // signer fro transaction
-let wallet = new ethers.Wallet(process.env.platon_pri, provider);
-export const DidResolverSigner = DIDResolverContract.connect(wallet);
+export let wallet = new ethers.Wallet(process.env.platon_pri, provider);
+export const DIDResolverSigner = DIDResolverContract.connect(wallet);
