@@ -4,7 +4,7 @@ import * as name from "../api/name.js"
 import { Error } from "../error/errors.js";
 
 
-describe("NameTest", async() => {
+describe("DID name test", async() => {
     let signer;
 
     before(async () => {

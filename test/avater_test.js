@@ -2,7 +2,7 @@ import { expect } from "chai";
 import * as DIDResolver from "../contract/resolver/resolverContract.js";
 import * as avatar from "../api/avatar.js"
 
-describe("AvatarTest", async() => {
+describe("DID avatar test", async() => {
     let signer;
     let didName;
     let tokenId;

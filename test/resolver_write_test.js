@@ -1,7 +1,7 @@
 import * as DIDResolver from "../contract/resolver/resolverContract.js";
 import * as resolver from "../api/resolver.js"
 
-describe("DIDReadTest", async() => {
+describe("DIDResolver write test", async() => {
     let signer;
     let tokenId;
 

@@ -2,7 +2,7 @@ import { expect } from "chai";
 import * as DIDResolver from "../contract/resolver/resolverContract.js";
 import * as resolver from "../api/resolver.js"
 
-describe("DIDReadTest", async() => {
+describe("DIDResolver read test", async() => {
     let signer;
     let tokenId;
 

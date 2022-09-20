@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import * as metadata from "../api/metadata.js"
 
-describe("MetadataTest", async() => {
+describe("DID metadata test", async() => {
    let tokenId;
 
     before(async () => {
