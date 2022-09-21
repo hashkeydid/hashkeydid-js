@@ -3,11 +3,9 @@ import * as DIDResolver from "../contract/resolver/resolverContract.js";
 import * as avatar from "../api/avatar.js"
 
 describe("DID avatar test", async() => {
-    let signer;
     let didName;
     let tokenId;
     let nft721;
-    let nft1155;
 
     before(async () => {
         signer = DIDResolver.wallet;
