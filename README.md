@@ -7,10 +7,3 @@ Javascript module to work with HashKey DID Protocol.
 ## Installation
 
 `npm install hashkeydid-js`
-
-## Configuration
-Add .env file in root src and set private key of you HashKey DID account
-```
-Private = "f3db6526e98e79c7bd1dcadfa15a01e1de5c7293669608f90b92305810434213"
-```
-
