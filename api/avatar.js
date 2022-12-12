@@ -57,7 +57,6 @@ export async function GetAvatarByDIDName(didName, chainList, overrides) {
 	if (avatarText == "") {
 		return Error.ErrAvatarNotSet;
 	}
-    // console.log(avatarText);
 	let avatarUrl = await AvatarFormatText2AvatarUrl(avatarText, chainList);
     return avatarUrl;
 }

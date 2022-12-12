@@ -15,7 +15,6 @@ export class DIDSigner {
      */
     async Claim(didName) {
         let tx = await this.DIDSigner.claim(didName);
-        console.log(tx)
         return tx;
     }
 
@@ -40,7 +39,6 @@ export class DIDSigner {
      */
     async AddAuth(tokenId, address) {
         let tx = await this.DIDSigner.addAuth(tokenId, address);
-        console.log(tx)
         return tx;
     }
 
@@ -126,6 +124,18 @@ export class DIDSigner {
         let tx = await this.DIDSigner.issueDG(_name, _symbol, _baseUri, _evidence, _transferable);
         return tx;
     }
+}
+
+/**
+ * GetAddrByDIDName returns DID address
+ *
+ * @param {didName} string 
+ * @return {addr} address
+ */
+ export async function GetAddrByDIDName(didName, overrides) {
+    let tokenId = await Did2TokenId(didName);
+    let addr = await DID.DIDContract.ownerOf(tokenId.toNumber(), overrides==undefined?{}:overrides)
+    return addr;
 }
 
 /**
