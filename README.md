@@ -14,8 +14,8 @@ Javascript module to work with HashKey DID Protocol.
 ## DID
 `DIDSigner` and `DIDResolverSigner` is the core objects to send transactions with [HashKey DID](https://hashkey.id) Contracts
 ```js
-didSigner = GetDIDSigner("private_key")
-resolverSigner = GetResolverSigner("private_key")
+didSigner = new DIDSigner("private_key")
+resolverSigner = new ResolverSigner("private_key")
 ```
 
 ## Example1-register
