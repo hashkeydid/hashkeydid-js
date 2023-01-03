@@ -1,7 +1,7 @@
 import * as DID from "./contracts/did/DIDContract.js";
 import { ethers } from "ethers";
 
-export class GetDIDSigner {
+export class DIDSigner {
     constructor(privateKey){
         let wallet = new ethers.Wallet(privateKey, DID.provider);
         this.DIDSigner = DID.DIDContract.connect(wallet);
