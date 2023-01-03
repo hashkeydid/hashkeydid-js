@@ -111,7 +111,7 @@ export async function GetDIDNameByAddrForce(address, overrides) {
 }
 
 /**
- * GetBlockChainAddress returns blockchain address according by coinType
+ * GetBlockChainAddress returns blockchain address according to coinType
  *
  * @param {tokenId} number 
  * @param {coinType} number eg: 1:ethereum
@@ -145,7 +145,7 @@ export async function GetPublicKey(tokenId) {
 }
 
 /**
- * Text returns value according by key
+ * Text returns value according to key
  *
  * @param {tokenId} number 
  * @param {key} string 
