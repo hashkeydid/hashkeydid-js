@@ -1,4 +1,4 @@
-import {GetDIDSigner} from "./did.js"
+import {DIDSigner} from "./did.js"
 import {VerifyDIDFormat} from "./did.js"
 import {GetAuthorizedAddrs} from "./did.js"
 import {IsAddrAuthorized} from "./did.js"
@@ -21,7 +21,7 @@ import {GetMetadataImage} from "./avatar.js"
 import {GetMetadataName} from "./avatar.js"
 import {GetMetadataDescription} from "./avatar.js"
 
-import {GetResolverSigner} from "./resolver.js"
+import {ResolverSigner} from "./resolver.js"
 import {GetDIDNameByAddr} from "./resolver.js"
 import {GetDIDNameByAddrForce} from "./resolver.js"
 import {GetBlockChainAddress} from "./resolver.js"
@@ -30,7 +30,7 @@ import {GetPublicKey} from "./resolver.js"
 import {Text} from "./resolver.js"
 
 export {
-    GetDIDSigner,
+    DIDSigner,
     VerifyDIDFormat,
     GetAuthorizedAddrs,
     IsAddrAuthorized,
@@ -53,7 +53,7 @@ export {
     GetMetadataName,
     GetMetadataDescription,
 
-    GetResolverSigner,
+    ResolverSigner,
     GetDIDNameByAddr,
     GetDIDNameByAddrForce,
     GetBlockChainAddress,
