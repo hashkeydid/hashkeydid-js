@@ -15,7 +15,7 @@ import {GetMetadataImageByTokenId} from "./avatar.js"
 import {GetAvatarByDIDName} from "./avatar.js"
 import {GetAvatarByTokenId} from "./avatar.js"
 import {AvatarFormatText2AvatarUrl} from "./avatar.js"
-import {getImageFromTokenURI} from "./avatar.js"
+import {GetImageFromTokenURI} from "./avatar.js"
 import {GetMetadata} from "./avatar.js"
 import {GetMetadataImage} from "./avatar.js"
 import {GetMetadataName} from "./avatar.js"
@@ -47,7 +47,7 @@ export {
     GetAvatarByDIDName,
     GetAvatarByTokenId,
     AvatarFormatText2AvatarUrl,
-    getImageFromTokenURI,
+    GetImageFromTokenURI,
     GetMetadata,
     GetMetadataImage,
     GetMetadataName,
