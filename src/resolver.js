@@ -3,7 +3,7 @@ import * as DID from "./contracts/did/DIDContract.js";
 import { ethers } from "ethers";
 
 // signer for transaction
-export class GetResolverSigner {
+export class ResolverSigner {
     constructor(privateKey){
         let wallet = new ethers.Wallet(privateKey, DID.provider);
         this.DIDResolverSigner = DIDResolver.DIDResolverContract.connect(wallet);
