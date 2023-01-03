@@ -117,7 +117,7 @@ export async function AvatarFormatText2AvatarUrl(formatText, chainList) {
 		default:
 			return Error.ErrInvalidAvatarText;
 		}
-		let image = await getImageFromTokenURI(tokenURI)
+		let image = await GetImageFromTokenURI(tokenURI)
         if (image == "") {
             return Error.ErrInvalidTokenURI;
         }
@@ -128,12 +128,12 @@ export async function AvatarFormatText2AvatarUrl(formatText, chainList) {
 }
 
 /**
- * getImageFromTokenURI parses tokenURI's info to get the image url
+ * GetImageFromTokenURI parses tokenURI's info to get the image url
  *
  * @param {tokenURI} number eg: 1
  * @return {image} return image url
  */
- export async function getImageFromTokenURI(tokenURI) {
+ export async function GetImageFromTokenURI(tokenURI) {
     try{
         let response = await fetch(tokenURI);
         let resJson = await response.json();
