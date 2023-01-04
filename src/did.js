@@ -10,8 +10,8 @@ export class DIDSigner {
     /**
      * Claim mints did
      *
-     * @param {didName} string eg: xxxxx.key 
-     * @return {tx} transaction details
+     * @param {string} didName eg: xxxxx.key
+     * @return {promise<Object>} transaction details
      */
     async Claim(didName) {
         let tx = await this.DIDSigner.claim(didName);
@@ -21,9 +21,9 @@ export class DIDSigner {
     /**
      * Mint mints did with address
      *
-     * @param {address} string eg: 20-hex address
-     * @param {didName} string eg: xxxxx.key 
-     * @return {tx} transaction details
+     * @param {string} address eg: 20-hex address
+     * @param {string} didName eg: xxxxx.key
+     * @return {promise<Object>} transaction details
      */
     async Mint(address, didName) {
         let tx = await this.DIDSigner.mint(address, didName);
@@ -33,9 +33,9 @@ export class DIDSigner {
     /**
      * AddAuth adds address to tokenId authorized address list
      *
-     * @param {tokenId} number eg: 12
-     * @param {address} string eg: 20-hex address
-     * @return {tx} transaction details
+     * @param {number} tokenId eg: 12
+     * @param {string} address eg: 20-hex address
+     * @return {promise<Object>} transaction details
      */
     async AddAuth(tokenId, address) {
         let tx = await this.DIDSigner.addAuth(tokenId, address);
@@ -45,9 +45,9 @@ export class DIDSigner {
     /**
      * RemoveAuth removes address from tokenId authorized address list
      *
-     * @param {tokenId} number eg: 12
-     * @param {address} string eg: 20-hex address
-     * @return {tx} transaction details
+     * @param {number} tokenId eg: 12
+     * @param {string} address eg: 20-hex address
+     * @return {promise<Object>} transaction details
      */
     async RemoveAuth(tokenId, address) {
         let tx = await this.DIDSigner.removeAuth(tokenId, address);
@@ -57,14 +57,14 @@ export class DIDSigner {
     /**
      * AddKYC adds KYC information for did
      *
-     * @param {tokenId} number eg: 12
-     * @param {KYCProvider} string eg: 20-hex address
-     * @param {KYCId} number eg: 1
-     * @param {status} bool eg: true/false
-     * @param {updateTime} number eg: 16342343423
-     * @param {expireTime} number eg: 16342343423
-     * @param {evidence} string eg: 32-hex string
-     * @return {tx} transaction details
+     * @param {number} tokenId eg: 12
+     * @param {string} KYCProvider eg: 20-hex address
+     * @param {number} KYCId eg: 1
+     * @param {boolean} status eg: true/false
+     * @param {number} updateTime eg: 16342343423
+     * @param {number} expireTime eg: 16342343423
+     * @param {string} evidence eg: 32-hex string
+     * @return {promise<Object>} transaction details
      */
     async AddKYC(tokenId, KYCProvider, KYCId, status, updateTime, expireTime, evidence) {
         let tx = await this.DIDSigner.addKYC(tokenId, KYCProvider, KYCId, status, updateTime, expireTime, evidence);
@@ -74,10 +74,10 @@ export class DIDSigner {
     /**
      * SetTokenSupply sets DeedGrain(erc1155) supply number of each tokenId
      *
-     * @param {DGAddr} string eg: 20-hex address
-     * @param {tokenId} number eg: 1
-     * @param {supply} number eg: 16342343423
-     * @return {tx} transaction details
+     * @param {string} DGAddr eg: 20-hex address
+     * @param {number} tokenId eg: 1
+     * @param {number} supply eg: 16342343423
+     * @return {promise<Object>} transaction details
      */
     async SetTokenSupply(DGAddr, tokenId, supply) {
         let tx = await this.DIDSigner.setTokenSupply(DGAddr, tokenId, supply);
@@ -85,25 +85,37 @@ export class DIDSigner {
     }
 
     /**
-     * MintDG mints DeedGrain contract(erc1155) NFT for addresses
+     * MintDG1 mints DeedGrain contract(erc1155) NFT for addresses
      *
-     * @param {DGAddr} string eg: 20-hex address
-     * @param {tokenId} number eg: 1
-     * @param {addrs} list eg: [20-hex address...]
-     * @return {tx} transaction details
+     * @param {string} DGAddr eg: 20-hex address
+     * @param {number} tokenId eg: 1
+     * @param {string[]} addrs eg: [20-hex address...]
+     * @return {promise<Object>} transaction details
      */
-    async MintDG(DGAddr, tokenId, addrs) {
-        let tx = await this.DIDSigner.mintDG(DGAddr, tokenId, addrs);
-        return tx;
+    async MintDGV1(DGAddr, tokenId, addrs) {
+        return this.DIDSigner.mintDGV1(DGAddr, tokenId, addrs);
+    }
+
+    /**
+     * MintDG2 mints DeedGrain contract(erc1155) NFT for addresses
+     *
+     * @param {string} DGAddr eg: 20-hex address
+     * @param {number} tokenId eg: 1
+     * @param {string[]} addrs eg: [20-hex address...]
+     * @param {string} data eg: ""
+     * @return {promise<Object>} transaction details
+     */
+    async MintDGV2(DGAddr, tokenId, addrs, data) {
+        return this.DIDSigner.mintDGV2(DGAddr, tokenId, addrs, data);
     }
 
     /**
      * ClaimDG mints DeedGrain contract(erc1155) NFT
      *
-     * @param {DGAddr} string eg: 20-hex address
-     * @param {tokenId} number eg: 1
-     * @param {evidence} string eg: 32-hex string
-     * @return {tx} transaction details
+     * @param {string} DGAddr eg: 20-hex address
+     * @param {number} tokenId eg: 1
+     * @param {string} evidence eg: 32-hex string
+     * @return {promise<Object>} transaction details
      */
     async ClaimDG(DGAddr, tokenId, evidence) {
         let tx = await this.DIDSigner.claimDG(DGAddr, tokenId, evidence);
@@ -113,24 +125,71 @@ export class DIDSigner {
     /**
      * IssueDG issues DeedGrain contract(erc1155)
      *
-     * @param {_name} string 
-     * @param {_symbol} string 
-     * @param {_baseUri} string 
-     * @param {_evidence} string eg: 32-hex string
-     * @param {_transferable} bool eg: true/false
-     * @return {tx} transaction details
+     * @param {string} _name
+     * @param {string} _symbol
+     * @param {string} _baseUri
+     * @param {string} _evidence eg: 32-hex string
+     * @param {boolean} _transferable eg: true/false
+     * @return {promise<Object>} transaction details
      */
     async IssueDG(_name, _symbol, _baseUri, _evidence, _transferable) {
         let tx = await this.DIDSigner.issueDG(_name, _symbol, _baseUri, _evidence, _transferable);
         return tx;
+    }
+
+    /**
+     * SetNFTSupply Only issuer can set NFT supply
+     *
+     * @param {string} NFTAddr
+     * @param {number} supply
+     * @return {promise<Object>} transaction details
+     */
+    async SetNFTSupply(NFTAddr, supply) {
+        return this.DIDSigner.setNFTSupply(NFTAddr, supply);
+    }
+
+    /**
+     * SetNFTBaseUri Only issuer can set NFT's baseuri
+     *
+     * @param {string} NFTAddr DG NFT contract address
+     * @param {string} baseUri All of the NFT's baseuri
+     * @return {promise<Object>} transaction details
+     */
+    async SetNFTBaseUri(NFTAddr, baseUri) {
+        return this.DIDSigner.setNFTBaseUri(NFTAddr, baseUri);
+    }
+
+    /**
+     * MintDGNFT Only issuer can airdrop the nft
+     *
+     * @param {string} NFTAddr DG NFT contract address
+     * @param {number} sid SeriesId
+     * @param {string[]} addrs All the users address to airdrop
+     * @return {promise<Object>} transaction details
+     */
+    async MintDGNFT(NFTAddr, sid, addrs) {
+        return this.DIDSigner.mintDGNFT(NFTAddr, sid, addrs);
+    }
+
+    /**
+     * ClaimDGNFT User claim the nft
+     *
+     * @param {string} NFTAddr DG NFT address
+     * @param {number} sid SeriesId
+     * @param {string} evidence Signature
+     * @return {promise<Object>} transaction details
+     */
+    async ClaimDGNFT(NFTAddr, sid, evidence) {
+        return this.DIDSigner.claimDGNFT(NFTAddr, sid, evidence);
     }
 }
 
 /**
  * GetAddrByDIDName returns DID address
  *
- * @param {didName} string 
- * @return {addr} address
+ * @param {string} didName
+ * @param {Object} [overrides]
+ * @return {promise<string>} address
  */
  export async function GetAddrByDIDName(didName, overrides) {
     let tokenId = await Did2TokenId(didName);
@@ -141,8 +200,8 @@ export class DIDSigner {
 /**
  * VerifyDIDFormat returns checking result about DID format
  *
- * @param {didName} string 
- * @return {flag} true/false
+ * @param {string} didName
+ * @return {promise<boolean>} true/false
  */
 export async function VerifyDIDFormat(didName) {
     let flag = await DID.DIDContract.verifyDIDFormat(didName);
@@ -152,9 +211,9 @@ export async function VerifyDIDFormat(didName) {
 /**
  * GetAuthorizedAddrs returns DID authorized addresses
  *
- * @param {tokenId} number eg: 12
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {addresses} return addresses
+ * @param {number} tokenId eg: 12
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<string[]>} return addresses
  */
  export async function GetAuthorizedAddrs(tokenId, overrides) {
     let addresses = await DID.DIDContract.getAuthorizedAddrs(tokenId, overrides==undefined?{}:overrides);
@@ -164,10 +223,10 @@ export async function VerifyDIDFormat(didName) {
 /**
  * IsAddrAuthorized returns checking result about DID authorized addresses
  *
- * @param {tokenId} number eg: 12
- * @param {address} string eg: 20-hex address
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {addresses} return addresses
+ * @param {number} tokenId eg: 12
+ * @param {string} address eg: 20-hex address
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<boolean>} return true/false
  */
  export async function IsAddrAuthorized(tokenId, address, overrides) {
     let flag = await DID.DIDContract.isAddrAuthorized(tokenId, address, overrides==undefined?{}:overrides);
@@ -177,11 +236,11 @@ export async function VerifyDIDFormat(didName) {
 /**
  * GetKYCInfo returns DID KYC information
  *
- * @param {tokenId} number eg: 12
- * @param {KYCProvider} string eg: 20-hex address
- * @param {KYCId} number eg: 1
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {tx} transaction details
+ * @param {number} tokenId eg: 12
+ * @param {string} KYCProvider eg: 20-hex address
+ * @param {number} KYCId eg: 1
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<Object>} transaction details
  */
  export async function GetKYCInfo(tokenId, KYCProvider, KYCId, overrides) {
     let results = await DID.DIDContract.getKYCInfo(tokenId, KYCProvider, KYCId, overrides==undefined?{}:overrides);
@@ -191,9 +250,9 @@ export async function VerifyDIDFormat(didName) {
 /**
  * DidClaimed returns checking result about DID registered information
  *
- * @param {didName} string eg: kee.key
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {result} true/false
+ * @param {string} didName eg: kee.key
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<boolean>} true/false
  */
  export async function DidClaimed(didName, overrides) {
     let result = await DID.DIDContract.didClaimed(didName, overrides==undefined?{}:overrides);
@@ -203,9 +262,9 @@ export async function VerifyDIDFormat(didName) {
 /**
  * AddrClaimed returns checking result about address registered information
  *
- * @param {address} string eg: 20-hex address
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {result} true/false
+ * @param {string} address eg: 20-hex address
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<boolean>} true/false
  */
  export async function AddrClaimed(address, overrides) {
     let result = await DID.DIDContract.addrClaimed(address, overrides==undefined?{}:overrides);
@@ -215,9 +274,9 @@ export async function VerifyDIDFormat(didName) {
 /**
  * TokenId2Did returns DID by tokenId
  *
- * @param {tokenId} number eg: 12
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {didName} did name
+ * @param {number} tokenId eg: 12
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<string>} did name
  */
  export async function TokenId2Did(tokenId, overrides) {
     let didName = await DID.DIDContract.tokenId2Did(tokenId, overrides==undefined?{}:overrides);
@@ -225,11 +284,11 @@ export async function VerifyDIDFormat(didName) {
 }
 
 /**
- * Did2TokenId returns tokenId by DID 
+ * Did2TokenId returns tokenId by DID
  *
- * @param {didName} string eg: hee.key
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {didName} did name
+ * @param {string} didName eg: hee.key
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<string>} tokenId
  */
  export async function Did2TokenId(didName, overrides) {
     let tokenId = await DID.DIDContract.did2TokenId(didName, overrides==undefined?{}:overrides);
@@ -239,9 +298,9 @@ export async function VerifyDIDFormat(didName) {
 /**
  * DeedGrainAddrToIssur returns issuer address by address
  *
- * @param {address} string eg: 20-hex address
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {issuer} 
+ * @param {string} address eg: 20-hex address
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {promise<Object>}
  */
  export async function DeedGrainAddrToIssur(address, overrides) {
     let issuer = await DID.DIDContract.deedGrainAddrToIssur(address, overrides==undefined?{}:overrides);

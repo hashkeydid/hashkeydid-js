@@ -184,6 +184,25 @@ export const DIDAbi = [
 		"anonymous": false,
 		"inputs": [
 			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "IssueNFT",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
 				"indexed": false,
 				"internalType": "address",
 				"name": "previousOwner",
@@ -406,6 +425,11 @@ export const DIDAbi = [
 			},
 			{
 				"internalType": "bytes",
+				"name": "data",
+				"type": "bytes"
+			},
+			{
+				"internalType": "bytes",
 				"name": "evidence",
 				"type": "bytes"
 			}
@@ -419,11 +443,47 @@ export const DIDAbi = [
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "NFTAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "evidence",
+				"type": "bytes"
+			}
+		],
+		"name": "claimDGNFT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "deedGrainAddrToIssur",
+		"name": "deedGrainAddrToIssuer",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "dgFactory",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -687,6 +747,39 @@ export const DIDAbi = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_symbol",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_baseUri",
+				"type": "string"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_evidence",
+				"type": "bytes"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_supply",
+				"type": "uint256"
+			}
+		],
+		"name": "issueNFT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "to",
 				"type": "address"
@@ -698,6 +791,29 @@ export const DIDAbi = [
 			}
 		],
 		"name": "mint",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "NFTAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address[]",
+				"name": "addrs",
+				"type": "address[]"
+			}
+		],
+		"name": "mintDGNFT",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -720,7 +836,35 @@ export const DIDAbi = [
 				"type": "address[]"
 			}
 		],
-		"name": "mintDG",
+		"name": "mintDGV1",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "DGAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address[]",
+				"name": "addrs",
+				"type": "address[]"
+			},
+			{
+				"internalType": "bytes",
+				"name": "data",
+				"type": "bytes"
+			}
+		],
+		"name": "mintDGV2",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -830,7 +974,7 @@ export const DIDAbi = [
 			},
 			{
 				"internalType": "bytes",
-				"name": "data",
+				"name": "_data",
 				"type": "bytes"
 			}
 		],
@@ -853,6 +997,19 @@ export const DIDAbi = [
 			}
 		],
 		"name": "setApprovalForAll",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "factory",
+				"type": "address"
+			}
+		],
+		"name": "setDGFactory",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -887,7 +1044,43 @@ export const DIDAbi = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "signer",
+				"name": "NFTAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "baseUri",
+				"type": "string"
+			}
+		],
+		"name": "setNFTBaseUri",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "NFTAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "supply",
+				"type": "uint256"
+			}
+		],
+		"name": "setNFTSupply",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "signer_",
 				"type": "address"
 			}
 		],
@@ -939,7 +1132,7 @@ export const DIDAbi = [
 	},
 	{
 		"inputs": [],
-		"name": "signer_",
+		"name": "signer",
 		"outputs": [
 			{
 				"internalType": "address",

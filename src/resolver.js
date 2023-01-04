@@ -12,22 +12,22 @@ export class ResolverSigner {
     /**
      * SetReverse sets the reverse status for address
      *
-     * @param {status} bool 
-     * @return {tx} transaction details
-    */
+     * @param {boolean} status
+     * @return {promise<Object>} transaction details
+     */
     async SetReverse(status) {
         let tx = await this.DIDResolverSigner.setReverse(status);
         return tx;
     }
-    
+
     /**
      * SetBlockChainAddress sets blockchain addresses
      *
-     * @param {tokenId} number 
-     * @param {coinType} number 
-     * @param {address} byte[]
-     * @return {tx} transaction details
-    */
+     * @param {number} tokenId
+     * @param {number} coinType
+     * @param {string} address
+     * @return {promise<Object>} transaction details
+     */
     async SetBlockChainAddress(tokenId, coinType, address) {
         let tx = await this.DIDResolverSigner.setAddr(tokenId, coinType, address);
         return tx;
@@ -36,10 +36,10 @@ export class ResolverSigner {
     /**
      * SetContentHash sets tokenId's cid
      *
-     * @param {tokenId} number 
-     * @param {url} string 
-     * @return {tx} transaction details
-    */
+     * @param {number} tokenId
+     * @param {string} url
+     * @return {promise<Object>} transaction details
+     */
     async SetContentHash(tokenId, url) {
         let tx = await this.DIDResolverSigner.setContentHash(tokenId, url);
         return tx;
@@ -48,11 +48,11 @@ export class ResolverSigner {
     /**
      * SetPubkey sets tokenId's public key
      *
-     * @param {tokenId} number 
-     * @param {x} string 
-     * @param {y} string 
-     * @return {tx} transaction details
-    */
+     * @param {tokenId} tokenId
+     * @param {string} x
+     * @param {string} y
+     * @return {promise<Object>} transaction details
+     */
     async SetPubkey(tokenId, x, y) {
         let tx = await this.DIDResolverSigner.setPubkey(tokenId, x, y);
         return tx;
@@ -60,12 +60,12 @@ export class ResolverSigner {
 
     /**
      * SetText sets key/value pairs
-     * 
-     * @param {tokenId} number 
-     * @param {key} string eg: name
-     * @param {value} string eg: herro
-     * @return {tx} transaction details
-    */
+     *
+     * @param {number} tokenId
+     * @param {string} key eg: name
+     * @param {string} value eg: herro
+     * @return {promise<Object>} transaction details
+     */
     async SetText(tokenId, key, value) {
         let tx = await this.DIDResolverSigner.setText(tokenId, key, value);
         return tx;
@@ -75,9 +75,9 @@ export class ResolverSigner {
 /**
  * GetDIDNameByAddr returns the did name by address when user set reverse true
  *
- * @param {address} string 20-hex address
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {did} return did name
+ * @param {string} address 20-hex address
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {Error|promise<string>} return did name
  */
 export async function GetDIDNameByAddr(address, overrides) {
     let isClaimed = await DID.DIDContract.addrClaimed(address, overrides==undefined?{}:overrides);
@@ -91,9 +91,9 @@ export async function GetDIDNameByAddr(address, overrides) {
 /**
  * GetDIDNameByAddrForce returns the did name by address even if reverse is false
  *
- * @param {address} string 20-hex address
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {did} return did name
+ * @param {string} address 20-hex address
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {Error|promise<string>} return did name
  */
 export async function GetDIDNameByAddrForce(address, overrides) {
     let isClaimed = await DID.DIDContract.addrClaimed(address, overrides==undefined?{}:overrides);
@@ -108,9 +108,9 @@ export async function GetDIDNameByAddrForce(address, overrides) {
 /**
  * GetBlockChainAddress returns blockchain address according to coinType
  *
- * @param {tokenId} number 
- * @param {coinType} number eg: 1:ethereum
- * @return {address} return blockchain address
+ * @param {number} tokenId
+ * @param {number} coinType eg: 1:ethereum
+ * @return {promise<string>} return blockchain address
  */
 export async function GetBlockChainAddress(tokenId, coinType) {
     let address = await DIDResolver.DIDResolverContract.addr(tokenId, coinType);
@@ -120,8 +120,8 @@ export async function GetBlockChainAddress(tokenId, coinType) {
 /**
  * GetContentHash returns tokenId's cid
  *
- * @param {tokenId} number 
- * @return {url} content url link
+ * @param {number} tokenId
+ * @return {promise<string>} content url link
  */
 export async function GetContentHash(tokenId) {
     let url = await DIDResolver.DIDResolverContract.contentHash(tokenId);
@@ -131,8 +131,8 @@ export async function GetContentHash(tokenId) {
 /**
  * GetPublicKey returns tokenId's public key
  *
- * @param {tokenId} number 
- * @return {publicKey} public key
+ * @param {number} tokenId
+ * @return {promise<string>} public key
  */
 export async function GetPublicKey(tokenId) {
     let publicKey = await DIDResolver.DIDResolverContract.pubkey(tokenId);
@@ -142,9 +142,9 @@ export async function GetPublicKey(tokenId) {
 /**
  * Text returns value according to key
  *
- * @param {tokenId} number 
- * @param {key} string 
- * @return {value} string
+ * @param {number} tokenId
+ * @param {string} key
+ * @return {promise<string>} string
  */
 export async function Text(tokenId, key) {
     let value = await DIDResolver.DIDResolverContract.text(tokenId, key);
