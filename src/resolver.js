@@ -12,16 +12,11 @@ export class ResolverSigner {
     /**
      * SetReverse sets the reverse status for address
      *
-     * @param {address} string 20-hex address
      * @param {status} bool 
      * @return {tx} transaction details
     */
-    async SetReverse(address, status) {
-        let isClaimed = await DID.DIDContract.addrClaimed(address);
-        if (!isClaimed) {
-            return Error.ErrAddrNotClaimed;
-        }
-        let tx = await this.DIDResolverSigner.setReverse(address, status);
+    async SetReverse(status) {
+        let tx = await this.DIDResolverSigner.setReverse(status);
         return tx;
     }
     

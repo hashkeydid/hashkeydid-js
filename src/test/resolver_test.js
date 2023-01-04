@@ -10,12 +10,16 @@ describe("DIDResolver test", async() => {
     let authorizedAddr;
 
     before(async () => {
-        signer = new resolver.ResolverSigner("f3db6526e98e79c7bd1dcadfa15a01e1de5c7293669608f90b923058102222222");
+        signer = new resolver.ResolverSigner("f3db6526e98e79c7bd1dcadfa15a01e1de5c7293669608f90b9230581047cbc4");
         tokenId = 13756;
         didName = "herro.key";
         authorizedAddr = "0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c";
         address = signer.DIDResolverSigner.signer.address;
     })
+
+    it("Set reverse is false", async () => {
+        let tx = await signer.SetReverse(false)
+    }).timeout(1000000);
 
     it("Get DID name when reverse is false", async () => {
         try {
