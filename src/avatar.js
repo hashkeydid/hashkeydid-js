@@ -128,7 +128,7 @@ export async function AvatarFormatText2AvatarUrl(formatText, chainList) {
 }
 
 /**
- * getImageFromTokenURI parses tokenURI's info to get the image url
+ * GetImageFromTokenURI parses tokenURI's info to get the image url
  *
  * @param {number} tokenURI eg: 1
  * @return {(Error|promise<string>)} return image url
