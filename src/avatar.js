@@ -9,9 +9,9 @@ import * as setting from "./config.js";
 /**
  * GetMetadataImageByDIDName returns the image url in metadata queried by did name
  *
- * @param {didName} string eg: herro.key
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {avatarUrl} return avatar url
+ * @param {string} didName eg: herro.key
+ * @param {Object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {(Error | promise<string>)} return avatar url or Error
  */
 export async function GetMetadataImageByDIDName(didName, overrides) {
     let res = await DID.DIDContract.didClaimed(didName, overrides==undefined?{}:overrides);
@@ -26,9 +26,9 @@ export async function GetMetadataImageByDIDName(didName, overrides) {
 /**
  * GetMetadataImageByTokenId returns the image url in metadata queried by tokenId
  *
- * @param {tokenId} number eg: 1
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {metadataAvatarUrl} return metadata avatar url
+ * @param {number} tokenId eg: 1
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {(Error | promise<string>)} return metadata avatar url
  */
 export async function GetMetadataImageByTokenId(tokenId, overrides) {
     let totalSupply = await DID.DIDContract.totalSupply(overrides==undefined?{}:overrides);
@@ -42,10 +42,10 @@ export async function GetMetadataImageByTokenId(tokenId, overrides) {
 /**
  * GetAvatarByDIDName returns the image url in resolver text queried by did name
  *
- * @param {didName} string eg: herro.key
- * @param {chainList} object eg: {"1": {"network": "Ethereum", "RPC": "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"}}
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {metadataAvatarUrl} return metadata avatar url
+ * @param {string} didName eg: herro.key
+ * @param {object} [chainList] eg: {"1": {"network": "Ethereum", "RPC": "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"}}
+ * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {(Error|promise<string>)} return metadata avatar url
  */
 export async function GetAvatarByDIDName(didName, chainList, overrides) {
 	let res = await DID.DIDContract.didClaimed(didName, overrides==undefined?{}:overrides);
@@ -64,10 +64,10 @@ export async function GetAvatarByDIDName(didName, chainList, overrides) {
 /**
  * GetAvatarByTokenId returns the image url in resolver text queried by tokenId
  *
- * @param {tokenId} number eg: 1
- * @param {chainList} object eg: {"1": {"network": "Ethereum", "RPC": "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"}}
- * @param {overrides} object Note block number, eg: {"blockTag": 36513266}
- * @return {avatarUrl} return avatar url
+ * @param {number} tokenId eg: 1
+ * @param {Object} [chainList] eg: {"1": {"network": "Ethereum", "RPC": "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"}}
+ * @param {Object} [overrides] Note block number, eg: {"blockTag": 36513266}
+ * @return {(Error|promise<string>)} return avatar url
  */
 export async function GetAvatarByTokenId(tokenId, chainList, overrides) {
 	let totalSupply = await DID.DIDContract.totalSupply(overrides==undefined?{}:overrides);
@@ -85,9 +85,9 @@ export async function GetAvatarByTokenId(tokenId, chainList, overrides) {
 /**
  * AvatarFormatText2AvatarUrl convert avatar format text in resolver to an image url
  *
- * @param {formatText} string eg: nft:1:721:0x394E3d3044fC89fCDd966D3cb35Ac0B32B0Cda91:8619
- * @param {chainList} object eg: {"1": {"network": "Ethereum", "RPC": "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"}}
- * @return {image} return image url
+ * @param {string} formatText eg: nft:1:721:0x394E3d3044fC89fCDd966D3cb35Ac0B32B0Cda91:8619
+ * @param {Object} [chainList] eg: {"1": {"network": "Ethereum", "RPC": "https://eth-mainnet.nodereal.io/v1/1659dfb40aa24bbb8153a677b98064d7"}}
+ * @return {(Error|promise<string>)} return image url
  */
 export async function AvatarFormatText2AvatarUrl(formatText, chainList) {
     let texts = formatText.split(":");
@@ -128,10 +128,10 @@ export async function AvatarFormatText2AvatarUrl(formatText, chainList) {
 }
 
 /**
- * GetImageFromTokenURI parses tokenURI's info to get the image url
+ * getImageFromTokenURI parses tokenURI's info to get the image url
  *
- * @param {tokenURI} number eg: 1
- * @return {image} return image url
+ * @param {number} tokenURI eg: 1
+ * @return {(Error|promise<string>)} return image url
  */
  export async function GetImageFromTokenURI(tokenURI) {
     try{
@@ -146,8 +146,8 @@ export async function AvatarFormatText2AvatarUrl(formatText, chainList) {
 /**
  * GetMetadata returns the Metadata by tokenId
  *
- * @param {tokenURI} number eg: 1
- * @return {resJson} response json format
+ * @param {number} tokenId eg: 1
+ * @return {promise<Object>} response json format
  */
 export async function GetMetadata(tokenId) {
     let MetadataUrl = `https://api.hashkey.id/did/api/nft/metadata/${tokenId}`;
@@ -159,8 +159,8 @@ export async function GetMetadata(tokenId) {
 /**
  * GetMetadataImage returns the image url in metadata by tokenId
  *
- * @param {tokenURI} number eg: 1
- * @return {image} return metadata image url
+ * @param {number} tokenId eg: 1
+ * @return {promise<string>} return metadata image url
  */
 export async function GetMetadataImage(tokenId) {
 	let metadata = await GetMetadata(tokenId);
@@ -173,8 +173,8 @@ export async function GetMetadataImage(tokenId) {
 /**
  * GetMetadataName returns the name in metadata by tokenId
  *
- * @param {tokenId} number eg: 1
- * @return {name} return metadata name
+ * @param {number} tokenId eg: 1
+ * @return {promise<string>} return metadata name
  */
 export async function GetMetadataName(tokenId) {
 	let metadata = await GetMetadata(tokenId);
@@ -187,8 +187,8 @@ export async function GetMetadataName(tokenId) {
 /**
  * GetMetadataDescription returns the description in metadata by tokenId
  *
- * @param {tokenId} number eg: 1
- * @return {description} return metadata description
+ * @param {number} tokenId eg: 1
+ * @return {promise<string>} return metadata description
  */
 export async function GetMetadataDescription(tokenId) {
 	let metadata = await GetMetadata(tokenId);

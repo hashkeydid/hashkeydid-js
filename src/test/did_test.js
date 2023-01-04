@@ -9,7 +9,7 @@ describe("DID test", async() => {
     let authorizedAddr;
 
     before(async () => {
-        signer = new did.GetDIDSigner("f3db6526e98e79c7bd1dcadfa15a01e1de5c7293669608f90b9230581047cbc4");
+        signer = new did.DIDSigner("f3db6526e98e79c7bd1dcadfa15a01e1de5c7293669608f90b9230581047cbc4");
         // signer = new did.GetDIDSigner("");
         tokenId = 13756;
         didName = "herro.key";
