@@ -17,6 +17,10 @@ describe("DIDResolver test", async() => {
         address = signer.DIDResolverSigner.signer.address;
     })
 
+    it("Set reverse is false", async () => {
+        let tx = await signer.SetReverse(false)
+    }).timeout(1000000);
+
     it("Get DID name when reverse is false", async () => {
         try {
             expect(await resolver.GetDIDNameByAddr("0xa060C1C3807059027Ca141EFb63f19E12e0cBF0c"));
