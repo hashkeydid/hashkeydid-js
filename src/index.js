@@ -7,7 +7,7 @@ import {DidClaimed} from "./did.js"
 import {AddrClaimed} from "./did.js"
 import {TokenId2Did} from "./did.js"
 import {Did2TokenId} from "./did.js"
-import {DeedGrainAddrToIssur} from "./did.js"
+import {DeedGrainAddrToIssuer} from "./did.js"
 import {GetAddrByDIDName} from "./did.js"
 
 import {GetMetadataImageByDIDName} from "./avatar.js"
@@ -39,7 +39,7 @@ export {
     AddrClaimed,
     TokenId2Did,
     Did2TokenId,
-    DeedGrainAddrToIssur,
+    DeedGrainAddrToIssuer,
     GetAddrByDIDName,
 
     GetMetadataImageByDIDName,
