@@ -296,13 +296,13 @@ export async function VerifyDIDFormat(didName) {
 }
 
 /**
- * DeedGrainAddrToIssur returns issuer address by address
+ * DeedGrainAddrToIssuer returns issuer address by address
  *
  * @param {string} address eg: 20-hex address
  * @param {object} [overrides] Note block number, eg: {"blockTag": 36513266}
  * @return {promise<Object>}
  */
- export async function DeedGrainAddrToIssur(address, overrides) {
-    let issuer = await DID.DIDContract.deedGrainAddrToIssur(address, overrides==undefined?{}:overrides);
+ export async function DeedGrainAddrToIssuer(address, overrides) {
+    let issuer = await DID.DIDContract.deedGrainAddrToIssuer(address, overrides==undefined?{}:overrides);
     return issuer;
 }
